@@ -3,39 +3,45 @@ export default async function handler(req, res) {
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ reply: "Missing API Key in Vercel settings." });
+    return res.status(500).json({ reply: "API Key missing." });
   }
 
-  // Get the user's message
   const userText = messages[messages.length - 1].content;
-  
-  // Barber shop instructions
   const instruction = "You are a helpful barber at The Crown Cut. Prices: Cut $45, Shave $55, Beard $35. Answer briefly: ";
 
   try {
-    // UPDATED: Using Gemini 2.5 Flash on the v1 stable endpoint
+    // Using the stable v1 endpoint with Gemini 2.5 Flash
     const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{
-          parts: [{ text: instruction + userText }]
-        }]
+        contents: [{ parts: [{ text: instruction + userText }] }],
+        // This part stops the "AI didn't return an answer" error
+        safetySettings: [
+          { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+          { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+          { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+        ]
       })
     });
 
     const data = await response.json();
 
-    if (data.candidates && data.candidates.content) {
+    // New 2026 Response Check
+    if (data.candidates && data.candidates.content && data.candidates.content.parts) {
       const aiResponse = data.candidates.content.parts.text;
       res.status(200).json({ reply: aiResponse });
-    } else if (data.error) {
-      // Shows specific error message from Google if something is still wrong
-      res.status(200).json({ reply: "Google Error: " + data.error.message });
-    } else {
-      res.status(200).json({ reply: "The AI connected but didn't return an answer. Try another question!" });
+    } 
+    else if (data.promptFeedback && data.promptFeedback.blockReason) {
+      res.status(200).json({ reply: "Google blocked this prompt for: " + data.promptFeedback.blockReason });
+    }
+    else {
+      // If there's a different error, show the raw message to help us debug
+      const rawError = data.error ? data.error.message : "Empty response from Google";
+      res.status(200).json({ reply: "Debug Info: " + rawError });
     }
   } catch (error) {
-    res.status(500).json({ reply: "Connection to Google failed. Check your Vercel logs." });
+    res.status(500).json({ reply: "Connection Error: " + error.message });
   }
 }
