@@ -2,44 +2,57 @@ export default async function handler(req, res) {
   const { messages } = req.body;
   const apiKey = process.env.GEMINI_API_KEY;
 
-  if (!apiKey) return res.status(500).json({ reply: "API Key missing." });
+  if (!apiKey) return res.status(500).json({ reply: "Configuration Error." });
 
   const userText = messages[messages.length - 1].content;
   
-  // THE SECRET SAUCE: Defining the "Vibe"
+  // PROFESSIONAL PERSONA: Clear, respectful, and direct
   const systemInstruction = `
-    ROLE: You are 'Mo', a friendly, laid-back barber at The Crown Cut. 
-    TONE: Casual, professional but brotherly. Use short sentences. 
-    PRICING: Haircut $45, Shave $55, Beard $35.
+    ROLE: Front-desk assistant for The Crown Cut.
+    PRICES: Haircut $45, Shave $55, Beard Trim $35.
+    TONE: Professional, polite, and efficient.
     RULES: 
-    1. NEVER say "I am an AI" or "How can I help you today?". 
-    2. Don't use bullet points or corporate jargon.
-    3. If they ask about prices, just tell them straight up like a friend would.
+    1. Provide direct answers regarding services and pricing. 
+    2. Use full, grammatically correct sentences.
+    3. Do not use slang, "AI" disclaimers, or informal language.
   `;
 
   try {
-    // Using Gemini 3.1 Flash-Lite for the best 2026 'Persona' stability
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`, {
+    // Using the stable 2026 endpoint for high reliability
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-3-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemInstruction }] },
-        contents: [{ role: "user", parts: [{ text: userText }] }],
+        contents: [
+          { role: "user", parts: [{ text: systemInstruction }] },
+          { role: "model", parts: [{ text: "Understood. I will act as the professional assistant for The Crown Cut." }] },
+          { role: "user", parts: [{ text: userText }] }
+        ],
         generationConfig: {
-          temperature: 0.8, // Higher temperature makes it sound more 'human' and less like a robot
-          maxOutputTokens: 100
-        }
+          temperature: 0.3, // Lower temperature = more professional/consistent
+          maxOutputTokens: 250
+        },
+        // Forcing safety filters OFF to stop the "Refusal" error
+        safetySettings: [
+          { category: "HARM_CATEGORY_HARASSMENT", threshold: "OFF" },
+          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "OFF" },
+          { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "OFF" },
+          { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "OFF" }
+        ]
       })
     });
 
     const data = await response.json();
 
     if (data.candidates && data.candidates.content) {
-      res.status(200).json({ reply: data.candidates.content.parts.text });
+      const aiResponse = data.candidates.content.parts.text;
+      res.status(200).json({ reply: aiResponse });
     } else {
-      res.status(200).json({ reply: "Yo, my signal is weak. Give me a second!" });
+      // If the AI refuses, we show the real reason for a split second to fix it
+      const reason = data.candidates?.?.finishReason || "UNKNOWN";
+      res.status(200).json({ reply: `Service temporarily unavailable (${reason}). Please try again.` });
     }
   } catch (error) {
-    res.status(500).json({ reply: "Shop's busy, try again in a bit!" });
+    res.status(500).json({ reply: "Network error. Please refresh the page." });
   }
 }
