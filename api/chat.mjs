@@ -2,39 +2,47 @@ export default async function handler(req, res) {
   const { messages } = req.body;
   const apiKey = process.env.GEMINI_API_KEY;
 
-  if (!apiKey) return res.status(500).json({ reply: "API Key missing." });
+  if (!apiKey) return res.status(500).json({ reply: "API Key Error." });
 
   const userText = messages[messages.length - 1].content;
   
-  const prompt = `You are a professional assistant for The Crown Cut Barbershop. 
-  Prices: Haircut $45, Shave $55, Beard Trim $35.
-  Answer the user briefly: ${userText}`;
+  // We "lead" the AI by starting the sentence for it
+  const prompt = `Context: The Crown Cut Barbershop. Prices: Haircut $45, Shave $55, Beard Trim $35.
+  User Question: ${userText}
+  Assistant: Of course! At The Crown Cut, `;
 
   try {
-    // UPDATED: Using v1beta and gemini-3.1-flash-lite-preview
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.5, maxOutputTokens: 150 }
+        generationConfig: { 
+          temperature: 0.8, // Higher temperature helps avoid "empty" responses
+          maxOutputTokens: 100 
+        },
+        // This stops the "silent blocking" of barbershop terms
+        safetySettings: [
+          { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+          { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+          { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+        ]
       })
     });
 
     const data = await response.json();
 
-    if (data.error) {
-      console.error("Google Error:", data.error.message);
-      return res.status(200).json({ reply: `System Busy: ${data.error.message}` });
-    }
-
     if (data.candidates && data.candidates.content) {
-      const aiResponse = data.candidates.content.parts.text;
-      res.status(200).json({ reply: aiResponse });
+      const aiText = data.candidates.content.parts.text;
+      // We combine our lead-in with the AI's answer
+      res.status(200).json({ reply: "Of course! At The Crown Cut, " + aiText });
     } else {
-      res.status(200).json({ reply: "The shop is busy. Please ask again!" });
+      // This helps us see if it's a SAFETY or RECITATION block
+      const reason = data.candidates?.?.finishReason || "API_SILENCE";
+      res.status(200).json({ reply: `The AI is being shy (Reason: ${reason}). Try asking 'What are your prices?'` });
     }
   } catch (error) {
-    res.status(500).json({ reply: "Connection issue. Please refresh." });
+    res.status(500).json({ reply: "Connection lost. Please refresh the page!" });
   }
 }
