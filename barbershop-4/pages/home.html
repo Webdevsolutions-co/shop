@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#0A0A0A"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="description" content="Toronto's premier barbershop. Precision cuts, hot towel shaves & beard sculpting. Book your appointment today."/>
+  <title>The Crown Cut — Premier Barbershop Toronto</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-logo" onclick="goPage('home')">
+      <span class="nav-logo-icon">✂</span>
+      <span class="nav-logo-text">The Crown Cut</span>
+    </div>
+    <ul class="nav-links">
+      <li><a class="active" onclick="goPage('home')">Home</a></li>
+      <li><a onclick="goPage('services')">Services</a></li>
+      <li><a onclick="goPage('about')">About</a></li>
+      <li><a onclick="goPage('testimonials')">Testimonials</a></li>
+      <li><a onclick="goPage('contact')">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-book" onclick="openBooking()"><span>Book Now</span></button>
+    </div>
+    <div class="nav-hamburger" onclick="toggleMobileMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" style="
+    position:fixed; top:60px; left:0; right:0; background:rgba(10,10,10,0.99);
+    border-bottom:1px solid rgba(201,168,76,0.12); z-index:99;
+    display:none; flex-direction:column; backdrop-filter:blur(24px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  ">
+    <a onclick="goPage('home'); closeMobileMenu()" style="padding:16px 20px; color:#888; font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; font-family:'Montserrat',sans-serif; cursor:pointer; display:block; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s;">Home</a>
+    <a onclick="goPage('services'); closeMobileMenu()" style="padding:16px 20px; color:#888; font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; font-family:'Montserrat',sans-serif; cursor:pointer; display:block; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s;">Services</a>
+    <a onclick="goPage('about'); closeMobileMenu()" style="padding:16px 20px; color:#888; font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; font-family:'Montserrat',sans-serif; cursor:pointer; display:block; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s;">About</a>
+    <a onclick="goPage('testimonials'); closeMobileMenu()" style="padding:16px 20px; color:#888; font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; font-family:'Montserrat',sans-serif; cursor:pointer; display:block; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s;">Testimonials</a>
+    <a onclick="goPage('contact'); closeMobileMenu()" style="padding:16px 20px; color:#888; font-size:0.73rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; font-family:'Montserrat',sans-serif; cursor:pointer; display:block; border-bottom:1px solid rgba(255,255,255,0.04); transition:color 0.2s;">Contact</a>
+    <div style="padding:16px 20px 20px;">
+      <button class="nav-book" style="width:100%; padding:14px; font-size:0.73rem;" onclick="openBooking(); closeMobileMenu()"><span>Book Appointment</span></button>
+    </div>
+  </div>
+
+  <!-- ===== HOME PAGE ===== -->
+  <div class="page active" id="page-home">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&q=80')"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Toronto's Premier Barbershop</div>
+        <h1 class="hero-title">The Art of the<br><em>Perfect Cut</em></h1>
+        <p class="hero-desc">
+          Where tradition meets precision. Every haircut, shave, and style is crafted with the care and expertise your look deserves.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-gold" onclick="openBooking()">
+            <span>Book Appointment</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <button class="btn-outline" onclick="goPage('services')">Our Services</button>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        Scroll to explore
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">15+</div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">4K+</div>
+          <div class="hero-stat-label">Happy Clients</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">8</div>
+          <div class="hero-stat-label">Expert Barbers</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO STRIP -->
+    <div class="stats-strip" style="background: linear-gradient(90deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02)); border-top:1px solid rgba(201,168,76,0.1); border-bottom:1px solid rgba(201,168,76,0.1); padding: 28px 60px; display:flex; align-items:center; justify-content:center; gap:60px; flex-wrap:wrap;">
+      <div class="stats-strip-item" style="display:flex; align-items:center; gap:12px;">
+        <span style="color:var(--gold); font-size:1.1rem;">✂</span>
+        <span style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.5);">Precision Cuts</span>
+      </div>
+      <div class="stats-strip-item" style="display:flex; align-items:center; gap:12px;">
+        <span style="color:var(--gold); font-size:1.1rem;">◆</span>
+        <span style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.5);">Hot Towel Shaves</span>
+      </div>
+      <div class="stats-strip-item" style="display:flex; align-items:center; gap:12px;">
+        <span style="color:var(--gold); font-size:1.1rem;">★</span>
+        <span style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.5);">5-Star Rated</span>
+      </div>
+      <div class="stats-strip-item" style="display:flex; align-items:center; gap:12px;">
+        <span style="color:var(--gold); font-size:1.1rem;">◈</span>
+        <span style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.5);">Premium Products</span>
+      </div>
+    </div>
+
+    <!-- FEATURED SERVICES (HOME PREVIEW) -->
+    <section class="home-section-pad" style="padding: 100px 60px; max-width:1400px; margin:0 auto;">
+      <div class="section-tag reveal">Our Craft</div>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:56px;">
+        <h2 class="section-title reveal">Signature <em style="font-style:italic; color:var(--gold);">Services</em></h2>
+        <button class="btn-outline reveal" onclick="goPage('services')">View All Services</button>
+      </div>
+
+      <div class="home-services-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+        <div class="service-card reveal" style="transition-delay:0.1s">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 4l3 3-9.5 9.5-3-3L14.5 4z"/><path d="M5 15l-2 4 4-2"/><circle cx="18" cy="6" r="2"/></svg>
+          <div class="service-name">Signature Cut</div>
+          <div class="service-desc">Our hallmark haircut experience. Consultation, wash, precision cut, and style finish.</div>
+          <div class="service-price">$45 <span>/ session</span></div>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.2s">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4"/><path d="M8 14h8"/></svg>
+          <div class="service-name">Hot Towel Shave</div>
+          <div class="service-desc">Traditional straight-razor shave with hot towel preparation and premium aftercare.</div>
+          <div class="service-price">$55 <span>/ session</span></div>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.3s">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div class="service-name">Beard Sculpt</div>
+          <div class="service-desc">Expert beard shaping, trimming, and conditioning to define your signature look.</div>
+          <div class="service-price">$35 <span>/ session</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY PREVIEW -->
+    <section class="home-gallery-pad" style="padding: 0 60px 100px; max-width:1400px; margin:0 auto;">
+      <div class="gallery-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:32px;">
+        <div>
+          <div class="section-tag">Our Work</div>
+          <h2 class="section-title">The <em style="font-style:italic; color:var(--gold);">Gallery</em></h2>
+        </div>
+        <button class="btn-outline" onclick="goPage('about')">Meet Our Team</button>
+      </div>
+      <div class="gallery-strip">
+        <div class="gallery-item">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80" alt="Haircut" />
+          <div class="gallery-item-overlay"><span>Fade Cut</span></div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80" alt="Beard" />
+          <div class="gallery-item-overlay"><span>Beard Sculpt</span></div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80" alt="Classic Cut" />
+          <div class="gallery-item-overlay"><span>Classic Cut</span></div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80" alt="Shave" />
+          <div class="gallery-item-overlay"><span>Hot Shave</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI TESTIMONIALS (HOME) -->
+    <section class="home-testi-pad" style="background: var(--dark); border-top:1px solid rgba(201,168,76,0.06); border-bottom:1px solid rgba(201,168,76,0.06); padding:80px 60px;">
+      <div style="max-width:1400px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:52px;">
+          <div class="section-tag" style="justify-content:center;">Client Love</div>
+          <h2 class="section-title reveal">What Our <em style="font-style:italic; color:var(--gold);">Clients Say</em></h2>
+        </div>
+        <div class="home-testimonials-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+          <div class="testimonial-card reveal" style="transition-delay:0.1s">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"Best barbershop I've been to in Toronto. The attention to detail is unmatched — left looking sharper than ever."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/80?img=11" alt=""/></div>
+              <div><div class="testimonial-name">Marcus Williams</div><div class="testimonial-role">Regular Client</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal" style="transition-delay:0.2s">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"From the moment you walk in, the whole experience is premium. These guys are artists with the clippers."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/80?img=3" alt=""/></div>
+              <div><div class="testimonial-name">David Chen</div><div class="testimonial-role">Monthly Member</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal" style="transition-delay:0.3s">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">"The hot towel shave is an experience every man needs. Incredibly relaxing and the results speak for themselves."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar"><img loading="lazy" decoding="async" src="https://i.pravatar.cc/80?img=7" alt=""/></div>
+              <div><div class="testimonial-name">James Carter</div><div class="testimonial-role">VIP Member</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:40px;">
+          <button class="btn-outline" onclick="goPage('testimonials')">Read All Reviews</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="home-cta-pad" style="padding:100px 60px; max-width:1400px; margin:0 auto; text-align:center;">
+      <div class="reveal" style="font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:20px;">Ready for Your Best Look?</div>
+      <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(2.4rem,5vw,4rem); font-weight:300; margin-bottom:20px; line-height:1.1;">Book Your Appointment <em style="font-style:italic; color:var(--gold);">Today</em></h2>
+      <p class="reveal" style="font-size:0.88rem; color:var(--muted); max-width:400px; margin:0 auto 40px; line-height:1.8; font-weight:300;">Walk in looking good. Walk out looking great. Same-day appointments available.</p>
+      <div class="reveal cta-actions" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn-gold" onclick="openBooking()">
+          <span>Book Now</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-outline" onclick="goPage('contact')">Get Directions</button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">The Crown Cut</div>
+          <div style="width:40px; height:1px; background:var(--gold); margin-bottom:16px;"></div>
+          <div class="footer-brand-desc">Toronto's premier barbershop, dedicated to the art of the perfect cut since 2010.</div>
+          <div class="footer-social">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="Facebook">FB</a>
+            <a href="#" title="Twitter">TW</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigate</div>
+          <ul class="footer-links">
+            <li><a onclick="goPage('home')">Home</a></li>
+            <li><a onclick="goPage('services')">Services</a></li>
+            <li><a onclick="goPage('about')">About</a></li>
+            <li><a onclick="goPage('testimonials')">Testimonials</a></li>
+            <li><a onclick="goPage('contact')">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a>Signature Cut</a></li>
+            <li><a>Hot Towel Shave</a></li>
+            <li><a>Beard Sculpt</a></li>
+            <li><a>Hair Coloring</a></li>
+            <li><a>Scalp Treatment</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Visit Us</div>
+          <ul class="footer-links">
+            <li><a>123 King St W, Toronto</a></li>
+            <li><a>Mon–Fri: 9AM–8PM</a></li>
+            <li><a>Sat: 8AM–6PM</a></li>
+            <li><a>Sun: 10AM–4PM</a></li>
+            <li><a href="tel:+14165550100">(416) 555-0100</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 The Crown Cut. All rights reserved.</span>
+        <span>Crafted with precision in Toronto, CA</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ===== SERVICES PAGE ===== -->
+  <div class="page" id="page-services">
+    <section class="section">
+      <div class="section-tag reveal">What We Offer</div>
+      <h1 class="section-title reveal">Our <em style="font-style:italic; color:var(--gold);">Services</em></h1>
+      <p class="section-desc reveal">Every service is performed by a skilled craftsman who takes pride in delivering results that exceed your expectations.</p>
+
+      <div class="services-grid">
+        <!-- Service cards injected by JS -->
+      </div>
+    </section>
+
+    <!-- PRICING NOTE -->
+    <div class="pricing-banner-pad" style="padding:0 60px 100px; max-width:1400px; margin:0 auto;">
+      <div class="pricing-banner-inner" style="background:var(--dark); border:1px solid rgba(201,168,76,0.1); padding:40px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+        <div>
+          <div style="font-family:var(--font-display); font-size:1.4rem; margin-bottom:6px;">Membership & Packages</div>
+          <div style="font-size:0.8rem; color:var(--muted); line-height:1.7;">Save 20% with a monthly membership. Unlimited cuts, priority booking, and exclusive member perks.</div>
+        </div>
+        <button class="btn-gold" onclick="openBooking()"><span>Explore Memberships</span></button>
+      </div>
+    </div>
+
+    <!-- Footer repeat -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">The Crown Cut</div>
+          <div style="width:40px;height:1px;background:var(--gold);margin-bottom:16px;"></div>
+          <div class="footer-brand-desc">Toronto's premier barbershop since 2010.</div>
+          <div class="footer-social"><a href="#" title="Instagram">IG</a><a href="#" title="Facebook">FB</a><a href="#" title="Twitter">TW</a></div>
+        </div>
+        <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a onclick="goPage('home')">Home</a></li><li><a onclick="goPage('services')">Services</a></li><li><a onclick="goPage('about')">About</a></li><li><a onclick="goPage('testimonials')">Testimonials</a></li><li><a onclick="goPage('contact')">Contact</a></li></ul></div>
+        <div><div class="footer-col-title">Hours</div><ul class="footer-links"><li><a>Mon–Fri: 9AM–8PM</a></li><li><a>Sat: 8AM–6PM</a></li><li><a>Sun: 10AM–4PM</a></li></ul></div>
+        <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>123 King St W, Toronto</a></li><li><a href="tel:+14165550100">(416) 555-0100</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 The Crown Cut.</span><span>Toronto, CA</span></div>
+    </footer>
+  </div>
+
+  <!-- ===== ABOUT PAGE ===== -->
+  <div class="page" id="page-about">
+    <section class="section">
+      <div class="about-hero">
+        <div class="about-img reveal">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&q=80" alt="The Crown Cut Interior"/>
+        </div>
+        <div>
+          <div class="section-tag reveal">Our Story</div>
+          <h1 class="section-title reveal">More Than Just<br><em style="font-style:italic; color:var(--gold);">A Haircut</em></h1>
+          <div class="divider-line reveal"></div>
+          <p class="reveal" style="font-size:0.9rem; line-height:1.85; color:rgba(250,250,248,0.7); margin-bottom:20px; font-weight:300;">
+            Founded in 2010 in the heart of Toronto, The Crown Cut was born from a single belief: every man deserves to feel his best. What started as a one-chair operation has grown into the city's most respected barbershop.
+          </p>
+          <p class="reveal" style="font-size:0.9rem; line-height:1.85; color:rgba(250,250,248,0.7); margin-bottom:36px; font-weight:300;">
+            Our barbers are not just technicians — they are artists. Each one trained for years before ever picking up clippers in our shop. We believe in the old-school values of craftsmanship, community, and conversation.
+          </p>
+          <button class="btn-gold reveal" onclick="goPage('contact')">
+            <span>Get In Touch</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- TEAM -->
+      <div class="section-tag reveal">The Team</div>
+      <h2 class="section-title reveal">Meet Our <em style="font-style:italic; color:var(--gold);">Barbers</em></h2>
+      <p class="section-desc reveal">Eight master barbers. Thousands of satisfied clients. One uncompromising standard.</p>
+
+      <div class="barbers-grid">
+        <div class="barber-card reveal" style="transition-delay:0.1s">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Marcus Reid"/>
+          <div class="barber-info">
+            <div class="barber-name">Marcus Reid</div>
+            <div class="barber-role">Head Barber & Co-Founder</div>
+          </div>
+        </div>
+        <div class="barber-card reveal" style="transition-delay:0.2s">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80" alt="James Okonkwo"/>
+          <div class="barber-info">
+            <div class="barber-name">James Okonkwo</div>
+            <div class="barber-role">Master Barber</div>
+          </div>
+        </div>
+        <div class="barber-card reveal" style="transition-delay:0.3s">
+          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80" alt="Carlos Mendez"/>
+          <div class="barber-info">
+            <div class="barber-name">Carlos Mendez</div>
+            <div class="barber-role">Fade Specialist</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><div class="footer-brand-name">The Crown Cut</div><div style="width:40px;height:1px;background:var(--gold);margin-bottom:16px;"></div><div class="footer-brand-desc">Toronto's premier barbershop since 2010.</div><div class="footer-social"><a href="#" title="Instagram">IG</a><a href="#" title="Facebook">FB</a></div></div>
+        <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a onclick="goPage('home')">Home</a></li><li><a onclick="goPage('services')">Services</a></li><li><a onclick="goPage('about')">About</a></li><li><a onclick="goPage('testimonials')">Testimonials</a></li><li><a onclick="goPage('contact')">Contact</a></li></ul></div>
+        <div><div class="footer-col-title">Hours</div><ul class="footer-links"><li><a>Mon–Fri: 9AM–8PM</a></li><li><a>Sat: 8AM–6PM</a></li><li><a>Sun: 10AM–4PM</a></li></ul></div>
+        <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>123 King St W, Toronto</a></li><li><a href="tel:+14165550100">(416) 555-0100</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 The Crown Cut.</span><span>Toronto, CA</span></div>
+    </footer>
+  </div>
+
+  <!-- ===== TESTIMONIALS PAGE ===== -->
+  <div class="page" id="page-testimonials">
+    <section class="section">
+      <div class="section-tag reveal">Client Reviews</div>
+      <h1 class="section-title reveal">What Our <em style="font-style:italic; color:var(--gold);">Clients Say</em></h1>
+      <p class="section-desc reveal">Over 4,000 satisfied clients and counting. Here's what some of them have to say.</p>
+
+      <!-- Stats row -->
+      <div class="reveal testi-stats" style="display:flex; gap:48px; margin-bottom:64px; flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-family:var(--font-display); font-size:3rem; font-weight:300; color:var(--gold); line-height:1;">4.9</div>
+          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-top:4px;">Average Rating</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:var(--font-display); font-size:3rem; font-weight:300; color:var(--gold); line-height:1;">4K+</div>
+          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-top:4px;">Total Reviews</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:var(--font-display); font-size:3rem; font-weight:300; color:var(--gold); line-height:1;">98%</div>
+          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-top:4px;">Would Return</div>
+        </div>
+      </div>
+
+      <div class="testimonials-track" id="testimonialsGrid">
+        <!-- Injected by JS -->
+      </div>
+
+      <div style="text-align:center; margin-top:60px;" class="reveal">
+        <button class="btn-gold" onclick="openBooking()">
+          <span>Book Your Experience</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><div class="footer-brand-name">The Crown Cut</div><div style="width:40px;height:1px;background:var(--gold);margin-bottom:16px;"></div><div class="footer-brand-desc">Toronto's premier barbershop since 2010.</div><div class="footer-social"><a href="#" title="Instagram">IG</a><a href="#" title="Facebook">FB</a></div></div>
+        <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a onclick="goPage('home')">Home</a></li><li><a onclick="goPage('services')">Services</a></li><li><a onclick="goPage('about')">About</a></li><li><a onclick="goPage('testimonials')">Testimonials</a></li><li><a onclick="goPage('contact')">Contact</a></li></ul></div>
+        <div><div class="footer-col-title">Hours</div><ul class="footer-links"><li><a>Mon–Fri: 9AM–8PM</a></li><li><a>Sat: 8AM–6PM</a></li><li><a>Sun: 10AM–4PM</a></li></ul></div>
+        <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>123 King St W, Toronto</a></li><li><a href="tel:+14165550100">(416) 555-0100</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 The Crown Cut.</span><span>Toronto, CA</span></div>
+    </footer>
+  </div>
+
+  <!-- ===== CONTACT PAGE ===== -->
+  <div class="page" id="page-contact">
+    <section class="section">
+      <div class="section-tag reveal">Get In Touch</div>
+      <h1 class="section-title reveal"><em style="font-style:italic; color:var(--gold);">Contact</em> Us</h1>
+      <p class="section-desc reveal">Reach out to book an appointment, ask about our services, or just say hello.</p>
+
+      <div class="contact-layout">
+        <!-- Info -->
+        <div>
+          <div class="contact-info-item reveal">
+            <div class="contact-info-icon">📍</div>
+            <div>
+              <div class="contact-info-label">Address</div>
+              <div class="contact-info-value">123 King Street West<br>Toronto, ON M5H 1J9</div>
+            </div>
+          </div>
+          <div class="contact-info-item reveal" style="transition-delay:0.1s">
+            <div class="contact-info-icon">📞</div>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-value">(416) 555-0100</div>
+            </div>
+          </div>
+          <div class="contact-info-item reveal" style="transition-delay:0.2s">
+            <div class="contact-info-icon">✉</div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">hello@thecrowncut.ca</div>
+            </div>
+          </div>
+
+          <div class="hours-table reveal" style="transition-delay:0.3s">
+            <div style="padding:14px 20px; border-bottom:1px solid rgba(201,168,76,0.15); background:rgba(201,168,76,0.04);">
+              <span style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); font-weight:600;">Hours of Operation</span>
+            </div>
+            <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">9:00 AM – 8:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">8:00 AM – 6:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">10:00 AM – 4:00 PM</span></div>
+          </div>
+
+          <!-- Map -->
+          <div class="contact-map-wrap reveal" style="transition-delay:0.4s; margin-top:32px; aspect-ratio:16/9; overflow:hidden; border:1px solid rgba(201,168,76,0.1);">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.0!2d-79.3832!3d43.6481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDM4JzUzLjIiTiA3OcKwMjInNTkuNSJX!5e0!3m2!1sen!2sca!4v1234567890"
+              width="100%" height="100%" style="border:0; filter:invert(90%) hue-rotate(180deg);"
+              allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <div style="font-family:var(--font-display); font-size:1.8rem; font-weight:300; margin-bottom:8px;" class="reveal">Send a Message</div>
+          <div style="font-size:0.78rem; color:var(--muted); margin-bottom:32px;" class="reveal">We'll respond within 24 hours.</div>
+
+          <div class="contact-form">
+            <div class="cf-row">
+              <div class="cf-group reveal">
+                <label>First Name</label>
+                <input type="text" id="cfFirst" placeholder="James"/>
+              </div>
+              <div class="cf-group reveal">
+                <label>Last Name</label>
+                <input type="text" id="cfLast" placeholder="Carter"/>
+              </div>
+            </div>
+            <div class="cf-group reveal">
+              <label>Email</label>
+              <input type="email" id="cfEmail" placeholder="you@example.com"/>
+            </div>
+            <div class="cf-group reveal">
+              <label>Phone (optional)</label>
+              <input type="tel" id="cfPhone" placeholder="(416) 000-0000"/>
+            </div>
+            <div class="cf-group reveal">
+              <label>Subject</label>
+              <select id="cfSubject">
+                <option value="">Select a topic</option>
+                <option>Book Appointment</option>
+                <option>Service Inquiry</option>
+                <option>Membership Info</option>
+                <option>General Question</option>
+                <option>Feedback</option>
+              </select>
+            </div>
+            <div class="cf-group reveal">
+              <label>Message</label>
+              <textarea id="cfMessage" placeholder="Tell us how we can help..."></textarea>
+            </div>
+            <button class="btn-gold reveal" onclick="submitContactForm()" style="width:100%; justify-content:center;">
+              <span>Send Message</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><div class="footer-brand-name">The Crown Cut</div><div style="width:40px;height:1px;background:var(--gold);margin-bottom:16px;"></div><div class="footer-brand-desc">Toronto's premier barbershop since 2010.</div><div class="footer-social"><a href="#" title="Instagram">IG</a><a href="#" title="Facebook">FB</a></div></div>
+        <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a onclick="goPage('home')">Home</a></li><li><a onclick="goPage('services')">Services</a></li><li><a onclick="goPage('about')">About</a></li><li><a onclick="goPage('testimonials')">Testimonials</a></li><li><a onclick="goPage('contact')">Contact</a></li></ul></div>
+        <div><div class="footer-col-title">Hours</div><ul class="footer-links"><li><a>Mon–Fri: 9AM–8PM</a></li><li><a>Sat: 8AM–6PM</a></li><li><a>Sun: 10AM–4PM</a></li></ul></div>
+        <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li><a>123 King St W, Toronto</a></li><li><a href="tel:+14165550100">(416) 555-0100</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 The Crown Cut.</span><span>Toronto, CA</span></div>
+    </footer>
+  </div>
+
+  <!-- ===== BOOKING MODAL ===== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+      <div class="section-tag" style="margin-bottom:8px;">Schedule</div>
+      <div style="font-family:var(--font-display); font-size:1.8rem; font-weight:300; margin-bottom:4px;">Book Appointment</div>
+      <div style="font-size:0.78rem; color:var(--muted); margin-bottom:28px;">Choose your service, barber, and preferred time.</div>
+
+      <div class="cf-group" style="margin-bottom:18px;">
+        <label>Service</label>
+        <select id="bookService">
+          <option value="">Select a service</option>
+          <option>Signature Cut — $45</option>
+          <option>Hot Towel Shave — $55</option>
+          <option>Beard Sculpt — $35</option>
+          <option>Cut + Beard Combo — $70</option>
+          <option>Hair Coloring — from $85</option>
+          <option>Kids Cut — $28</option>
+          <option>Scalp Treatment — $40</option>
+        </select>
+      </div>
+      <div class="cf-group" style="margin-bottom:18px;">
+        <label>Barber</label>
+        <select id="bookBarber">
+          <option value="">Any Available Barber</option>
+          <option>Marcus Reid (Head Barber)</option>
+          <option>James Okonkwo</option>
+          <option>Carlos Mendez</option>
+          <option>Andre Thomas</option>
+          <option>Kevin Park</option>
+        </select>
+      </div>
+      <div class="modal-dt-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="cf-group" style="margin-bottom:18px;">
+          <label>Date</label>
+          <input type="date" id="bookDate"/>
+        </div>
+        <div class="cf-group" style="margin-bottom:18px;">
+          <label>Time</label>
+          <select id="bookTime">
+            <option value="">Select time</option>
+            <option>9:00 AM</option><option>9:30 AM</option>
+            <option>10:00 AM</option><option>10:30 AM</option>
+            <option>11:00 AM</option><option>11:30 AM</option>
+            <option>12:00 PM</option><option>12:30 PM</option>
+            <option>1:00 PM</option><option>1:30 PM</option>
+            <option>2:00 PM</option><option>2:30 PM</option>
+            <option>3:00 PM</option><option>3:30 PM</option>
+            <option>4:00 PM</option><option>4:30 PM</option>
+            <option>5:00 PM</option><option>5:30 PM</option>
+            <option>6:00 PM</option><option>6:30 PM</option>
+            <option>7:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="cf-group" style="margin-bottom:28px;">
+        <label>Notes (optional)</label>
+        <textarea id="bookNotes" placeholder="Any special requests or preferences..." style="min-height:80px; resize:none;"></textarea>
+      </div>
+      <button class="btn-gold" style="width:100%; justify-content:center;" onclick="confirmBooking()">
+        <span>Confirm Booking</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="mainToast"></div>
+
+  <!-- ===== AI CHATBOT WIDGET ===== -->
+
+  <!-- Floating Button -->
+  <button class="chat-fab" id="chatBtn" onclick="toggleChat()" title="Chat with Crown AI">
+    <div class="chat-fab-icon chat-icon-open">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="chat-fab-icon chat-icon-close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </div>
+    <div class="chat-fab-ping"></div>
+  </button>
+
+  <!-- Chat Panel -->
+  <div class="chat-panel" id="chatPanel">
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-avatar">
+          <span>✂</span>
+          <div class="chat-online-dot"></div>
+        </div>
+        <div>
+          <div class="chat-name">Crown <span class="chat-ai-badge">AI</span></div>
+          <div class="chat-status">The Crown Cut Assistant</div>
+        </div>
+      </div>
+      <button class="chat-close-btn" onclick="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Quick Prompts -->
+    <div class="chat-quick-prompts" id="chatQuickPrompts">
+      <button onclick="quickPrompt('What are your hours?')">🕐 Hours</button>
+      <button onclick="quickPrompt('What services do you offer?')">✂ Services</button>
+      <button onclick="quickPrompt('How do I book an appointment?')">📅 Booking</button>
+      <button onclick="quickPrompt('Where are you located?')">📍 Location</button>
+    </div>
+
+    <!-- Message Feed -->
+    <div class="chat-feed" id="chatFeed"></div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+      <textarea
+        id="chatInput"
+        class="chat-input"
+        placeholder="Ask me anything about The Crown Cut..."
+        rows="1"
+      ></textarea>
+      <button class="chat-send-btn" id="chatSend" onclick="sendChatMessage()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+      </button>
+    </div>
+
+  </div>
+
+  <style>
+    /* ===== CHAT FAB ===== */
+    .chat-fab {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C9A84C, #9A7A30);
+      border: none;
+      cursor: pointer;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.45), 0 2px 8px rgba(0,0,0,0.4);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #0A0A0A;
+    }
+    .chat-fab:hover {
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 14px 40px rgba(201,168,76,0.55), 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .chat-fab.active {
+      background: linear-gradient(135deg, #1A1A1A, #252525);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: #C9A84C;
+    }
+
+    .chat-fab-icon {
+      position: absolute;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chat-icon-close {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.5);
+    }
+    .chat-fab.active .chat-icon-open {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.5);
+    }
+    .chat-fab.active .chat-icon-close {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    /* Ping animation */
+    .chat-fab-ping {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #52C07A;
+      border: 2px solid #0A0A0A;
+      transition: opacity 0.3s;
+    }
+    .chat-fab.active .chat-fab-ping { opacity: 0; }
+
+    /* ===== CHAT PANEL ===== */
+    .chat-panel {
+      position: fixed;
+      bottom: 106px;
+      left: 32px;
+      width: 380px;
+      max-height: 560px;
+      background: #111111;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.05);
+      z-index: 199;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.85) translateY(20px);
+      transform-origin: bottom left;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chat-panel.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Header */
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      flex-shrink: 0;
+    }
+    .chat-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C9A84C, #9A7A30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #0A0A0A;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .chat-online-dot {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #52C07A;
+      border: 2px solid #111;
+    }
+    .chat-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #FAFAF8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chat-ai-badge {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 2px 6px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px;
+      color: #C9A84C;
+    }
+    .chat-status {
+      font-size: 0.68rem;
+      color: #888;
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 1px;
+    }
+    .chat-close-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chat-close-btn:hover {
+      background: rgba(224,82,82,0.1);
+      border-color: rgba(224,82,82,0.3);
+      color: #E05252;
+    }
+
+    /* Quick prompts */
+    .chat-quick-prompts {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      overflow-x: auto;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      flex-shrink: 0;
+      scrollbar-width: none;
+    }
+    .chat-quick-prompts::-webkit-scrollbar { display: none; }
+    .chat-quick-prompts button {
+      white-space: nowrap;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      color: rgba(250,250,248,0.65);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .chat-quick-prompts button:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: rgba(201,168,76,0.3);
+      color: #C9A84C;
+    }
+
+    /* Feed */
+    .chat-feed {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .chat-feed::-webkit-scrollbar { width: 4px; }
+    .chat-feed::-webkit-scrollbar-track { background: transparent; }
+    .chat-feed::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
+
+    /* Messages */
+    .chat-msg {
+      display: flex;
+      animation: msgIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .chat-msg-user { justify-content: flex-end; }
+    .chat-msg-bot  { justify-content: flex-start; }
+
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-bubble {
+      max-width: 82%;
+      padding: 11px 16px;
+      border-radius: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+    .chat-msg-user .chat-bubble {
+      background: linear-gradient(135deg, #C9A84C, #9A7A30);
+      color: #0A0A0A;
+      border-bottom-right-radius: 4px;
+      font-weight: 500;
+    }
+    .chat-msg-bot .chat-bubble {
+      background: rgba(255,255,255,0.06);
+      color: rgba(250,250,248,0.9);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-bottom-left-radius: 4px;
+    }
+
+    /* Typing indicator */
+    .chat-typing {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      padding: 14px 18px;
+    }
+    .chat-typing span {
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #C9A84C;
+      opacity: 0.4;
+      animation: typingBounce 1.2s infinite;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50%       { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* Input area */
+    .chat-input-area {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 14px 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+      color: #FAFAF8;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      resize: none;
+      outline: none;
+      line-height: 1.5;
+      max-height: 120px;
+      overflow-y: auto;
+      transition: border-color 0.2s;
+    }
+    .chat-input::placeholder { color: rgba(255,255,255,0.25); }
+    .chat-input:focus {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.04);
+    }
+    .chat-send-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #C9A84C, #9A7A30);
+      border: none;
+      color: #0A0A0A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chat-send-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba(201,168,76,0.4);
+    }
+    .chat-send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .chat-footer-note {
+      text-align: center;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.18);
+      font-family: 'Montserrat', sans-serif;
+      padding: 6px 0 10px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .chat-panel {
+        left: 12px;
+        right: 12px;
+        width: auto;
+        bottom: 88px;
+        max-height: 72svh;
+        border-radius: 14px;
+      }
+      .chat-fab {
+        left: 16px;
+        bottom: 16px;
+        width: 54px;
+        height: 54px;
+      }
+      .chat-header { padding: 14px 16px; }
+      .chat-quick-prompts { padding: 10px 12px; gap: 6px; }
+      .chat-quick-prompts button { padding: 5px 12px; font-size: 0.65rem; }
+      .chat-feed { padding: 14px 12px; gap: 10px; }
+      .chat-bubble { font-size: 0.78rem; padding: 10px 14px; max-width: 88%; }
+      .chat-input-area { padding: 10px 12px; gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .chat-panel {
+        left: 0;
+        right: 0;
+        width: 100%;
+        bottom: 0;
+        max-height: 80svh;
+        border-radius: 16px 16px 0 0;
+      }
+      .chat-fab {
+        left: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
