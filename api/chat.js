@@ -3,37 +3,35 @@ export default async function handler(req, res) {
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ reply: "API Key is missing in Vercel!" });
+    return res.status(500).json({ reply: "Missing API Key in Vercel settings." });
   }
 
-  const userMessage = messages[messages.length - 1].content;
-
-  // Simplified instructions for the AI
-  const systemPrompt = "You are a helpful barber at The Crown Cut. Prices: Cut $45, Shave $55, Beard $35. Answer this question briefly: ";
+  const userText = messages[messages.length - 1].content;
+  const instruction = "You are a helpful barber assistant at The Crown Cut. Prices: Cut $45, Shave $55, Beard $35. Answer briefly: ";
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    // UPDATED URL: Changed v1beta to v1
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{
-          parts: [{ text: systemPrompt + userMessage }]
+          parts: [{ text: instruction + userText }]
         }]
       })
     });
 
     const data = await response.json();
 
-    // This part checks the "box" Google sends back
-    if (data.candidates && data.candidates.content && data.candidates.content.parts) {
+    if (data.candidates && data.candidates.content) {
       const aiResponse = data.candidates.content.parts.text;
       res.status(200).json({ reply: aiResponse });
+    } else if (data.error) {
+      res.status(200).json({ reply: "Google Error: " + data.error.message });
     } else {
-      // If Google sends an error, show it here
-      const errorDetail = data.error ? data.error.message : "AI refused to answer";
-      res.status(200).json({ reply: "Google Gemini says: " + errorDetail });
+      res.status(200).json({ reply: "AI received but didn't answer. Check safety settings." });
     }
   } catch (error) {
-    res.status(500).json({ reply: "The connection to the AI failed entirely." });
+    res.status(500).json({ reply: "Connection failed. Check Vercel logs." });
   }
 }
