@@ -6,12 +6,15 @@ export default async function handler(req, res) {
     return res.status(500).json({ reply: "Missing API Key in Vercel settings." });
   }
 
+  // Get the user's message
   const userText = messages[messages.length - 1].content;
-  const instruction = "You are a helpful barber assistant at The Crown Cut. Prices: Cut $45, Shave $55, Beard $35. Answer briefly: ";
+  
+  // Barber shop instructions
+  const instruction = "You are a helpful barber at The Crown Cut. Prices: Cut $45, Shave $55, Beard $35. Answer briefly: ";
 
   try {
-    // UPDATED URL: Changed v1beta to v1
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    // UPDATED: Using Gemini 2.5 Flash on the v1 stable endpoint
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -27,11 +30,12 @@ export default async function handler(req, res) {
       const aiResponse = data.candidates.content.parts.text;
       res.status(200).json({ reply: aiResponse });
     } else if (data.error) {
+      // Shows specific error message from Google if something is still wrong
       res.status(200).json({ reply: "Google Error: " + data.error.message });
     } else {
-      res.status(200).json({ reply: "AI received but didn't answer. Check safety settings." });
+      res.status(200).json({ reply: "The AI connected but didn't return an answer. Try another question!" });
     }
   } catch (error) {
-    res.status(500).json({ reply: "Connection failed. Check Vercel logs." });
+    res.status(500).json({ reply: "Connection to Google failed. Check your Vercel logs." });
   }
 }
