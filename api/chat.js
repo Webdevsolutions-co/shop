@@ -2,46 +2,44 @@ export default async function handler(req, res) {
   const { messages } = req.body;
   const apiKey = process.env.GEMINI_API_KEY;
 
-  if (!apiKey) return res.status(500).json({ reply: "API Key missing in Vercel." });
+  if (!apiKey) return res.status(500).json({ reply: "API Key is missing." });
 
   const userText = messages[messages.length - 1].content;
   
-  // 2026 Best Practice: Use a 'System Instruction' for the Barber shop
-  const systemInstruction = "You are a barber at The Crown Cut. Prices: Haircut $45, Shave $55, Beard Trim $35. Be friendly and very brief.";
+  // Combine rules and question into one block for maximum stability
+  const combinedPrompt = `CONTEXT: You are a barber at The Crown Cut. Prices: Haircut $45, Shave $55, Beard Trim $35.
+  USER QUESTION: ${userText}
+  INSTRUCTION: Answer briefly in one sentence.`;
 
   try {
-    // UPDATED: Using the March 2026 stable preview
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`, {
+    // Using the stable v1 endpoint and the latest 2026 Flash model
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-3-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemInstruction }] },
-        contents: [{ role: "user", parts: [{ text: userText }] }],
+        contents: [{
+          role: "user",
+          parts: [{ text: combinedPrompt }]
+        }],
         generationConfig: {
-          temperature: 0.4, // Keep it focused on prices
-          maxOutputTokens: 150
-        },
-        safetySettings: [
-          { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
-        ]
+          temperature: 0.7,
+          maxOutputTokens: 2048 // Higher value prevents the "None" response bug
+        }
       })
     });
 
     const data = await response.json();
 
-    // 2026 JSON Check: Handling the new "candidates" array format
-    if (data.candidates && data.candidates.content && data.candidates.content.parts) {
+    if (data.candidates && data.candidates.content) {
       const aiResponse = data.candidates.content.parts.text;
       res.status(200).json({ reply: aiResponse });
     } else {
-      // If Google still fails, we show the actual error so we can kill the bug
-      const errorMessage = data.error ? data.error.message : "Google refused to generate text.";
-      res.status(200).json({ reply: "System Alert: " + errorMessage });
+      // This will tell us the EXACT reason Google is saying no
+      const reason = data.candidates?.?.finishReason || "Unknown Error";
+      const detail = data.error ? data.error.message : "No text returned";
+      res.status(200).json({ reply: `System Block (${reason}): ${detail}` });
     }
   } catch (error) {
-    res.status(500).json({ reply: "Network Error: " + error.message });
+    res.status(500).json({ reply: "Connection failed: " + error.message });
   }
 }
